@@ -1,0 +1,540 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DE BLANCHE</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --black: #111111;
+  --white: #f5f5f0;
+  --lime: #f5f5f0;
+  --gray: #777777;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--white);
+  color: var(--black);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 7%;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--white);
+  border-bottom: 1px solid #ddd;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -2px;
+}
+
+nav .links {
+  display: flex;
+  gap: 25px;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.cart-btn {
+  background: var(--black);
+  color: white;
+  border: 0;
+  padding: 12px 16px;
+}
+
+.hero {
+  background: var(--black);
+  color: white;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 35px;
+  padding: 65px 8%;
+}
+
+.hero small {
+  color: var(--lime);
+  letter-spacing: 3px;
+  font-weight: bold;
+}
+
+.hero h1 {
+  font-size: clamp(48px, 7vw, 88px);
+  letter-spacing: -5px;
+  line-height: .92;
+  margin: 22px 0;
+}
+
+.hero p {
+  color: #c3c3c3;
+  line-height: 1.8;
+  max-width: 400px;
+  margin-bottom: 28px;
+}
+
+.cta {
+  display: inline-block;
+  background: var(--lime);
+  color: var(--black);
+  padding: 15px 22px;
+  font-weight: bold;
+  border: 0;
+}
+
+.hero img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.banner {
+  text-align: center;
+  background: var(--lime);
+  padding: 17px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  font-size: 12px;
+}
+
+section {
+  padding: 70px 7%;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 15px;
+  margin-bottom: 32px;
+}
+
+.heading p {
+  font-size: 12px;
+  color: var(--gray);
+}
+
+.heading h2 {
+  font-size: clamp(30px, 4vw, 46px);
+  letter-spacing: -2px;
+  margin-top: 8px;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 25px 18px;
+}
+
+.product {
+  min-width: 0;
+}
+
+.photo-wrap {
+  position: relative;
+  background: #e4e4e0;
+  overflow: hidden;
+}
+
+.product img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  transition: transform .35s;
+}
+
+.product:hover img {
+  transform: scale(1.04);
+}
+
+.badge {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  z-index: 1;
+  background: white;
+  padding: 8px 10px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.product-info {
+  padding: 15px 0;
+}
+
+.product-info h3 {
+  font-size: 16px;
+  margin-bottom: 7px;
+}
+
+.category {
+  color: var(--gray);
+  font-size: 11px;
+  margin-bottom: 14px;
+}
+
+.product-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.price {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.add-btn {
+  border: 0;
+  background: var(--black);
+  color: white;
+  padding: 11px 12px;
+  font-size: 11px;
+}
+
+.add-btn:hover {
+  background: #444;
+}
+
+.story {
+  background: #e6e6df;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
+}
+
+.story img {
+  width: 100%;
+  max-height: 450px;
+  object-fit: cover;
+}
+
+.story h2 {
+  font-size: clamp(34px, 5vw, 55px);
+  letter-spacing: -3px;
+  margin: 20px 0;
+}
+
+.story p {
+  color: #555;
+  line-height: 1.9;
+  margin-bottom: 25px;
+}
+
+footer {
+  background: var(--black);
+  color: white;
+  padding: 28px 7%;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  font-size: 12px;
+}
+
+#toast {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background: var(--lime);
+  color: var(--black);
+  padding: 15px 20px;
+  z-index: 20;
+  display: none;
+  font-weight: bold;
+}
+
+@media (max-width: 700px) {
+  nav {
+    padding: 17px 5%;
+  }
+
+  nav .links {
+    display: none;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 45px 6%;
+  }
+
+  .hero h1 {
+    letter-spacing: -3px;
+  }
+
+  .hero img {
+    height: 300px;
+  }
+
+  section {
+    padding: 50px 5%;
+  }
+
+  .products {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .product-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .story {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a class="logo" href="#">DE BLANCHE<span style="color:#f5f5f0">®</span></a>
+
+  <div class="links">
+    <a href="#home">Home</a>
+    <a href="#catalog">Collection</a>
+    <a href="#story">About Us</a>
+  </div>
+
+  <button class="cart-btn" onclick="showCart()">
+    BAG (<span id="cartCount">0</span>)
+  </button>
+</nav>
+
+<header class="hero" id="home">
+  <div>
+    <small>NEW COLLECTION / 2026</small>
+    <h1>WEAR YOUR<br>OWN WORLD.</h1>
+    <p>
+      Temukan gaya yang mewakili dirimu.
+      Pakaian simpel, karakter kuat, dan
+      kenyamanan untuk setiap hari.
+    </p>
+    <a href="#catalog" class="cta">EXPLORE COLLECTION ↗</a>
+  </div>
+
+  <!-- FOTO HERO: gunakan file JPG -->
+  <img src="images/IMG_9082 - Copy.JPG"
+       alt="Koleksi streetwear VOID">
+</header>
+
+<div class="banner">
+  EVERYDAY WITH BLANCHE. — DE BLANCHE
+</div>
+
+<section id="catalog">
+  <div class="heading">
+    <div>
+      <p>FIND YOUR NEXT FAVORITE</p>
+      <h2>OUR COLLECTION.</h2>
+    </div>
+    <p>STREETWEAR / DAILY ESSENTIALS</p>
+  </div>
+
+  <div class="products" id="productList"></div>
+</section>
+
+<section class="story" id="story">
+  <img src="images/IMG_9105.JPG" alt="Hoodie koleksi VOID">
+
+  <div>
+    <p>MORE THAN CLOTHING</p>
+    <h2>YOUR STYLE.<br>YOUR RULES.</h2>
+    <p>
+      DE BLANCHE adalah konsep clothing brand yang
+      mengutamakan ekspresi diri, desain modern,
+      dan gaya yang bebas. Jadikan setiap outfit
+      bagian dari cerita kamu.
+    </p>
+    <a href="#catalog" class="cta">SHOP COLLECTION ↗</a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 VOID® CLOTHING</span>
+  <span>BUILT DIFFERENT. WORN DIFFERENT.</span>
+</footer>
+
+<div id="toast"></div>
+
+<script>
+/*
+  DATA PRODUK
+
+  Simpan foto JPG di folder "images".
+  Contoh: images/kaos-hitam.jpg
+*/
+
+const products = [
+  {
+    name: "White Old Castle",
+    category: "BOXY TEE T-SHIRT",
+    price: 129000,
+    badge: "BEST SELLER",
+    image: "images/IMG_8990.jpg"
+  },
+  {
+    name: "Black USA Blanche",
+    category: "BOXY TEE T-SHIRT",
+    price: 129000,
+    badge: "POPULAR",
+    image: "images/IMG_8993 - Copy.JPG"
+  },
+  {
+    name: "Green Chameleon BLANS",
+    category: "FITTED TEE",
+    price: 279000,
+    badge: "NEW DROP",
+    image: "images/IMG_9038 - Copy.JPG"
+  },
+  {
+    name: "Premium White Long Sleeve",
+    category: "WAFFLE COLLECTION",
+    price: 279000,
+    badge: "NEW DROP",
+    image: "images/IMG_9048 - Copy.JPG"
+  },
+  {
+    name: "Premium Black Long Sleeve",
+    category: "WAFFLE COLLECTION",
+    price: 279000,
+    badge: "NEW DROP",
+    image: "images/IMG_9057.JPG"
+  }
+];
+
+let cart = [];
+
+const productList = document.getElementById("productList");
+
+function formatRupiah(number) {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    maximumFractionDigits: 0
+  }).format(number);
+}
+
+function renderProducts() {
+  productList.innerHTML = products.map((product, index) => `
+    <article class="product">
+      <div class="photo-wrap">
+        <span class="badge">${product.badge}</span>
+
+        <img
+          src="${product.image}"
+          alt="${product.name}"
+          loading="lazy"
+          onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22400%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%23dddddd%22/%3E%3Ctext x=%2250%25%22 y=%2248%25%22 text-anchor=%22middle%22 font-size=%2218%22 fill=%22%23333333%22%3EFoto tidak ditemukan%3C/text%3E%3Ctext x=%2250%25%22 y=%2255%25%22 text-anchor=%22middle%22 font-size=%2212%22 fill=%22%23333333%22%3EPeriksa folder images%3C/text%3E%3C/svg%3E';"
+        >
+      </div>
+
+      <div class="product-info">
+        <h3>${product.name}</h3>
+        <p class="category">${product.category}</p>
+
+        <div class="product-bottom">
+          <span class="price">${formatRupiah(product.price)}</span>
+
+          <button class="add-btn" onclick="addToCart(${index})">
+            + ADD TO BAG
+          </button>
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
+function addToCart(index) {
+  cart.push(products[index]);
+
+  document.getElementById("cartCount").textContent = cart.length;
+
+  notify(products[index].name + " ditambahkan ke keranjang!");
+}
+
+function showCart() {
+  if (cart.length === 0) {
+    alert("Keranjang masih kosong. Pilih produk terlebih dahulu!");
+    return;
+  }
+
+  const detail = cart.map((item, index) =>
+    `${index + 1}. ${item.name} - ${formatRupiah(item.price)}`
+  ).join("\n");
+
+  const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+  const message =
+    "Halo, saya ingin memesan produk VOID:\n\n" +
+    detail +
+    "\n\nTotal: " + formatRupiah(total) +
+    "\nMohon informasi cara pemesanannya.";
+
+  if (confirm(
+    detail + "\n\nTOTAL: " + formatRupiah(total) +
+    "\n\nLanjutkan ke WhatsApp?"
+  )) {
+    // Ganti dengan nomor WhatsApp toko kamu.
+    // Gunakan kode negara 62 tanpa tanda +.
+    const phone = "628996979769";
+
+    window.open(
+      "https://wa.me/" + phone +
+      "?text=" + encodeURIComponent(message),
+      "_blank"
+    );
+  }
+}
+
+function notify(message) {
+  const toast = document.getElementById("toast");
+
+  toast.textContent = message;
+  toast.style.display = "block";
+
+  setTimeout(() => {
+    toast.style.display = "none";
+  }, 2500);
+}
+
+renderProducts();
+</script>
+
+</body>
+</html>
